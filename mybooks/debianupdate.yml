@@ -1,0 +1,20 @@
+- name: Aktualisiere Debian-Systeme
+  hosts: debian
+  become_method: su
+  tasks:
+  
+    - name: install updates (Ubuntu, Debian)
+      tags: update
+      apt:
+       upgrade: yes
+       update_cache: yes
+       autoremove: yes
+      when: ansible_distribution in ['Debian']
+      
+      
+    - name: install updates dist-upgrade
+      tags: dist
+      apt:
+       upgrade: dist
+       update_cache: yes
+      when: ansible_distribution in ['Debian']

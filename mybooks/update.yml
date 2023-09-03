@@ -1,0 +1,17 @@
+---
+- name: Aktualisiere Ubuntu-Systeme
+  hosts: ubuntu, raspi
+  become: true
+
+  tasks:
+    - name: Aktualisiere die Paketliste
+      apt:
+        update_cache: yes
+      tags: update
+
+    - name: Führe das Systemupgrade durch
+      apt:
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
+      tags: upgrade

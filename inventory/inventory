@@ -1,0 +1,11 @@
+[ubuntu]
+Ubuntu90.vreden.home
+
+[debian]
+192.168.0.155
+
+[raspi]
+raspberrypi.vreden.home
+
+[dns]
+networker.vreden.home
