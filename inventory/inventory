@@ -1,5 +1,6 @@
 [ubuntu]
 Ubuntu90.vreden.home
+192.168.0.162
 
 [debian]
 192.168.0.155
@@ -9,3 +10,4 @@ raspberrypi.vreden.home
 
 [dns]
 networker.vreden.home
+

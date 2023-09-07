@@ -1,6 +1,6 @@
 ---
 - name: Aktualisiere Ubuntu-Systeme
-  hosts: dns
+  hosts: all
   become: true
 
   tasks:
@@ -15,3 +15,42 @@
         autoremove: yes
         autoclean: yes
       tags: upgrade
+
+
+************************************tempDNSNEW********************
+- name: Add or modify an DNS Record"
+  hosts: dns
+  
+  vars_prompt:
+    - name: IP
+      prompt: Bitte IP-Adresse eingeben
+      private: false
+    
+    - name: HN
+      prompt: und hostname eingeben
+      private: false
+  
+  tasks:
+  - name: Update DNS A Record
+    nsupdate:
+      server: "192.168.0.35"
+      zone: "vreden.home"
+      record: "{{HN}}"
+      value: "{{IP}}"
+      
+  - name: Update PTR Record
+    nsupdate:
+      server: "192.168.0.35"
+      zone: "0.168.192.in-addr.arpa"  # Die korrekte rDNS-Zone für das Subnetz
+      record: "{{ IP.split('.')[-1] }}"  # Die letzten Oktette der IP-Adresse ohne Punkte
+      type: PTR
+      value: "{{ HN + '.vreden.home' }}"
+     
+  - name: Reload BIND configuration
+    become: true
+    command: rndc reload
+    
+  - name: Neustart des BIND-Dienstes
+    systemd:
+      name: named  # Der Name des BIND-Dienstes kann variieren, bitte überprüfe den Namen auf deinem System
+      state: restarted

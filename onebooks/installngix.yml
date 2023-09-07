@@ -1,0 +1,43 @@
+---
+- hosts: nginx
+  become: true
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      notify: 
+        - Configure Nginx
+      
+    - name: Create custom default page
+      copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Willkommen bei Pro-vreden</title>
+              <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    text-align: center;
+                }
+                h1 {
+                    color: #333; /* Ändern Sie die Textfarbe nach Bedarf */
+                }
+                </style>
+          </head>
+          <body>
+              <h1><br>Hallo auf der vorl&auml;ufigen Nginx-Seite von <br>Pro-Vreden</h1>
+              <p>Hier wird mal wieder ein Projekt entstehen..... hoffentlich :-)</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+      notify: 
+        - Configure Nginx
+
+  handlers:
+    - name: Configure Nginx
+      systemd:
+        name: nginx
+        enabled: yes
+        state: started

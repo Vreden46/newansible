@@ -8,6 +8,14 @@
       apt:
         update_cache: yes
       tags: update
+      
+    - name: install updates
+      tags: update
+      apt:
+        upgrade: yes
+        update_cache: yes
+      tags: update
+     
 
     - name: Führe das Systemupgrade durch
       apt:
