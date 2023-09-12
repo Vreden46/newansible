@@ -1,6 +1,6 @@
 ---
 - name: Aktualisiere Ubuntu-Systeme
-  hosts: ubuntu, raspi, dns
+  hosts: sql
   become: true
 
   tasks:

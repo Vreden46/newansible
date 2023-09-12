@@ -1,12 +1,13 @@
 [ubuntu]
-Ubuntu90.vreden.home
-192.168.0.162
+#Ubuntu90.vreden.home
+ngp.vreden.home
+proxmint.vreden.home
 
 [debian]
 192.168.0.155
 
-[raspi]
-raspberrypi.vreden.home
+#[raspi]
+#raspberrypi.vreden.home
 
 [dns]
 networker.vreden.home
