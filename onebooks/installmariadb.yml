@@ -3,6 +3,10 @@
   become: true
   vars:
     root_password: "12345"
+    db_name: app
+    db_user: appuser
+    db_password: "12345"
+    db_user_tv: "torsten"
   
   tasks:
     - name: Install config-parser
@@ -76,3 +80,37 @@
           Y
           Y
           Y
+    
+    
+
+ 
+    - name: Create the MySQL user "torsten" with superuser privileges
+      mysql_user:
+        name: "{{ db_user_tv }}"
+        host: localhost
+        password: "{{ root_password }}"
+        priv: "*.*:ALL,GRANT"
+        state: present
+
+    #- name: Reload privileges
+      #mysql_db:
+        #name: "*.*"
+        #state: flush privileges
+ 
+    - name: Create the database "app"
+      mysql_db:
+        name: "{{ db_name }}"
+        state: present
+
+    - name: Create the MySQL user "appuser"
+      mysql_user:
+        name: "{{ db_user }}"
+        host: localhost
+        password: "{{ db_password }}"
+        priv: "{{ db_name }}.*:ALL"
+        state: present
+
+    #- name: Reload privileges
+      #mysql_db:
+        #name: "*.*"
+        #state: flush privileges
