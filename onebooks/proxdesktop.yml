@@ -1,0 +1,32 @@
+---
+- name: Install QEMU-Guest-Agent, Xrdp, and XFCE4, and reboot
+  hosts: kali
+  become: true  # Erlaubt das Ausführen von Befehlen als root
+
+  tasks:
+    - name: Install QEMU-Guest-Agent
+      apt:
+        name: qemu-guest-agent
+        state: present
+
+    - name: Install Xrdp and XFCE4
+      apt:
+        name: 
+          - xrdp
+          - xfce4
+        state: present
+
+    - name: Start Xrdp service
+      systemd:
+        name: xrdp
+        state: started
+        enabled: yes
+
+    - name: Reboot the computer
+      reboot:
+
+    - name: Start and enable QEMU-Guest-Agent service
+      systemd:
+        name: qemu-guest-agent
+        state: started
+        enabled: yes
