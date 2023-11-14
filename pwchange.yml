@@ -1,7 +1,7 @@
 ---
 - name: Passwort eines Benutzers ändern
   hosts: all
-  become: yes  # Um als Root-Benutzer auszuführen
+  become: true
   tasks:
     - name: Passwort für den Benutzer ändern
       user:
