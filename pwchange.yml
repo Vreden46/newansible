@@ -7,4 +7,4 @@
       user:
         name: your_username
         update_password: always
-        password: "{{ 'Zulu12' | password_hash('sha512') }}"
+        password: "{{ 'Zulu12!' | password_hash('sha512') }}"
