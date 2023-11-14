@@ -1,6 +1,6 @@
 ---
 - name: Passwort eines Benutzers ändern
-  hosts: your_target_host
+  hosts: all
   become: yes  # Um als Root-Benutzer auszuführen
   tasks:
     - name: Passwort für den Benutzer ändern
