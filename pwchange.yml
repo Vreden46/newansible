@@ -5,6 +5,6 @@
   tasks:
     - name: Passwort für den Benutzer ändern
       user:
-        name: your_username
+        name: torsten
         update_password: always
         password: "{{ 'Zulu12!' | password_hash('sha512') }}"
