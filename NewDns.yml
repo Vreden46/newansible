@@ -1,14 +1,9 @@
 - name: Add or modify an DNS Record"
   hosts: dns
   
-  vars_prompt:
-    - name: IP
-      prompt: Bitte IP-Adresse eingeben
-      private: false
-    
-    - name: HN
-      prompt: und hostname eingeben
-      private: false
+  vars:
+    IP: "192.168.1.189"  # Hier setzt du die gewünschte IP-Adresse
+    HN: "nextcloud"  # Hier setzt du den gewünschten Hostnamen
   
   tasks:
   - name: Update DNS A Record
