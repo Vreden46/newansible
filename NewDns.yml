@@ -1,9 +1,9 @@
 - name: Add or modify an DNS Record"
   hosts: dns
   
-  vars:
-    IP: "192.168.1.189"  # Hier setzt du die gewünschte IP-Adresse
-    HN: "nextcloud"  # Hier setzt du den gewünschten Hostnamen
+  #vars:
+    #IP: "192.168.1.189"  # Hier setzt du die gewünschte IP-Adresse
+    #HN: "nextcloud"  # Hier setzt du den gewünschten Hostnamen
   
   tasks:
   - name: Update DNS A Record
