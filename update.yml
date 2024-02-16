@@ -1,6 +1,6 @@
 ---
 - name: Aktualisiere Ubuntu-Systeme
-  hosts: sql
+  hosts: all
   become: true
 
   tasks:
