@@ -1,6 +1,6 @@
 ---
 - name: Aktualisiere Ubuntu-Systeme
-  hosts: all
+  hosts: lab
   become: true
 
   tasks:
