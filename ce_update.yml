@@ -1,0 +1,8 @@
+- name: Installiere Updates (Alma Linux)
+  hosts: cents
+  become: true
+  tasks:
+    - name: Führe ein Systemupdate durch
+      dnf:
+        update_only: yes
+        update_cache: yes
