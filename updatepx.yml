@@ -1,0 +1,31 @@
+- name: Copy Script to Proxmox Host
+  hosts: all
+  gather_facts: false
+  become: true
+  
+  tasks:
+    - name: Download Script from HTTP
+      get_url:
+        url: "http://192.168.0.77:81/download/updatepx.sh"  # Ihre HTTP-Adresse hier einfügen
+        dest: /root/updatepx.sh  # Der Pfad auf dem Ansible-Host, wohin das Skript heruntergeladen werden soll
+
+   - name: Ensure ansiblescripts directory exists
+     file:
+        path: /root/ansiblescripts
+        state: directory
+
+    - name: Copy Script to Proxmox Host
+      copy:
+        src: /root/updatepx.sh  # Der lokale Pfad zum heruntergeladenen Skript auf Ihrem Ansible-Host
+        dest: /root/ansiblescript/updatepx.sh  # Der Pfad auf dem Proxmox-Host, wohin das Skript kopiert werden soll
+        mode: 0755  # Setzen Sie die Berechtigungen für das Skript (z. B. ausführbar)
+        force: yes
+
+    - name: Update and upgrade everything on pve
+      shell: 
+        cmd: bash /root/updatepx.sh
+      register: var_script
+
+    - name: Shell script output
+      debug:
+        msg: "{{ var_script.stdout_lines }}"
