@@ -11,14 +11,16 @@
 
     - name: Ensure ansiblescripts directory exists
       file:
-        path: /root/ansiblescripts
+        path: /root/ansiblescript
         state: directory
+     
 
     - name: Copy Script to Proxmox Host
       copy:
         src: /root/updatepx.sh  # Der lokale Pfad zum heruntergeladenen Skript auf Ihrem Ansible-Host
         dest: /root/ansiblescript/updatepx.sh  # Der Pfad auf dem Proxmox-Host, wohin das Skript kopiert werden soll
         mode: 0755  # Setzen Sie die Berechtigungen für das Skript (z. B. ausführbar)
+        remote_src: yes
         force: yes
 
     - name: Update and upgrade everything on pve
