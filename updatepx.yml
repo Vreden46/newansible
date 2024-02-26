@@ -9,8 +9,8 @@
         url: "http://192.168.0.77:81/download/updatepx.sh"  # Ihre HTTP-Adresse hier einfügen
         dest: /root/updatepx.sh  # Der Pfad auf dem Ansible-Host, wohin das Skript heruntergeladen werden soll
 
-   - name: Ensure ansiblescripts directory exists
-     file:
+    - name: Ensure ansiblescripts directory exists
+      file:
         path: /root/ansiblescripts
         state: directory
 
