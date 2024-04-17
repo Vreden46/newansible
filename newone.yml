@@ -17,16 +17,16 @@
       tags: update
 
      - name: install qemu guest agent
-      apt:
-        name: qemu-guest-agent
-        state: present
+       apt:
+         name: qemu-guest-agent
+         state: present
 
-    - name: Führe das Systemupgrade durch
-      apt:
-        upgrade: dist
-        autoremove: yes
-        autoclean: yes
-      tags: upgrade
+     - name: Führe das Systemupgrade durch
+       apt:
+         upgrade: dist
+         autoremove: yes
+         autoclean: yes
+       tags: upgrade
 
-    - name: reboot host
-      reboot:
+     - name: reboot host
+       reboot:
