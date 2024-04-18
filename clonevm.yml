@@ -8,10 +8,10 @@
       community.general.proxmox_kvm:
         node: pve
         api_user: root@pam
-        api_password: xxxxxxx
+        api_password: "{{PW}}"
         api_host: 192.168.0.10
         clone: ubuntu-cloud
-        name: server1
+        name: "{{HN}}"
         full: false
         format: unspecified
         timeout: 500
@@ -20,9 +20,9 @@
       community.general.proxmox_kvm:
         node: pve
         api_user: root@pam
-        api_password: xxxxxxx
+        api_password: "{{PW}}"
         api_host: 192.168.0.10
         name: server1
         ipconfig:
-          ipconfig0: 'ip=192.168.0.15/24,gw=192.168.0.1'
+          ipconfig0: 'ip={{IP}}/24,gw=192.168.0.1'
         update: yes
