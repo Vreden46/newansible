@@ -1,7 +1,6 @@
----
-- name: Clone template
-  hosts: pve
-  gather_facts: no
+- hosts: all
+  become: true
+  tasks:
 
   tasks:
     - name: Clone template
