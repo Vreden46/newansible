@@ -15,8 +15,11 @@
     - name: upgrade all packages
       command: apt upgrade -y
 
-    - name: set-keyma, fuer Tastaturlayout deutsch
-      command: localectl set-keymap de
+    - name: XKBLAYOUT DE, fuer Tastaturlayout deutsch
+      lineinfile:
+        path: /etc/default/keyboard
+        regexp: '^XKBLAYOUT='
+        line: 'XKBLAYOUT="de"'
     
     - name: reboot host
       reboot:
