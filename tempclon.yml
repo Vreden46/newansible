@@ -1,0 +1,45 @@
+---
+- name: Clone template
+  hosts: pve
+  gather_facts: no
+
+  tasks:
+    - name: Clone template
+      community.general.proxmox_kvm:
+        node: pve
+        api_user: root@pam
+        api_password: xxxx
+        api_host: 192.168.0.10
+        clone: ubuntu-cloud
+        newid: 1055
+        name: server5
+        full: false
+        format: unspecified
+        timeout: 500
+    
+    - name: Warte 15 Sekunden
+      pause:
+        seconds: 15
+
+    - name: Update
+      community.general.proxmox_kvm:
+        node: pve
+        api_user: root@pam
+        api_password: xxxx
+        api_host: 192.168.0.10
+        vmid: 1055
+        ipconfig:
+          ipconfig0: 'ip=192.168.0.18/24,gw=192.168.0.1'
+        update: yes
+    
+    
+    - name: update disk
+      community.general.proxmox_disk:
+        #node: pve
+        api_user: root@pam
+        api_password: xxxx
+        api_host: 192.168.0.10
+        vmid: 1055
+        disk: scsi0
+        size: +25G
+        state: resized
