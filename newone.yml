@@ -15,5 +15,8 @@
     - name: upgrade all packages
       command: apt upgrade -y
 
+    - name: Fuehre den Befehl setxkbmap aus, fuer Tastaturlayout deutsch
+      shell: setxkbmap de
+    
     - name: reboot host
       reboot:
