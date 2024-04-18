@@ -1,4 +1,4 @@
-- hosts: pvenodes
+- hosts: all
   become: true
   tasks:
 
