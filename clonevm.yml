@@ -8,7 +8,7 @@
       community.general.proxmox_kvm:
         node: pve
         api_user: root@pam
-        api_password: Molixnel46!
+        api_password: xxxxxxx
         api_host: 192.168.0.10
         clone: ubuntu-cloud
         name: server1
@@ -20,7 +20,7 @@
       community.general.proxmox_kvm:
         node: pve
         api_user: root@pam
-        api_password: Molixnel46!
+        api_password: xxxxxxx
         api_host: 192.168.0.10
         name: server1
         ipconfig:
