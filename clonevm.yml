@@ -40,6 +40,6 @@
         api_host: 192.168.0.10
         vmid: "{{NI}}"
         disk: scsi0
-        size: +"{{GB}}"
+        size: "+{{GB}}G"
         state: resized
         
