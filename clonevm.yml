@@ -29,6 +29,7 @@
         vmid: "{{NI}}"
         ipconfig:
           ipconfig0: 'ip={{IP}}/24,gw=192.168.0.1'
+        memory: "{{MM}}"
         update: yes
 
     - name: Update disk
@@ -39,6 +40,6 @@
         api_host: 192.168.0.10
         vmid: "{{NI}}"
         disk: scsi0
-        size: +25G
+        size: +"{{GB}}"
         state: resized
         
