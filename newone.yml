@@ -20,7 +20,14 @@
         path: /etc/default/keyboard
         regexp: '^XKBLAYOUT='
         line: 'XKBLAYOUT="de"'
-        
+
+    - name: Kommentiere die Include-Zeile aus
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^Include /etc/ssh/sshd_config.d/\*\.conf'
+        line: '# Include /etc/ssh/sshd_config.d/*.conf'
+        state: present
+    
     - name: Ermögliche die Authentifizierung per Passwort
       lineinfile:
         path: /etc/ssh/sshd_config
