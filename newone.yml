@@ -20,6 +20,13 @@
         path: /etc/default/keyboard
         regexp: '^XKBLAYOUT='
         line: 'XKBLAYOUT="de"'
-    
+        
+    - name: Ermögliche die Authentifizierung per Passwort
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+        state: present
+        
     - name: reboot host
       reboot:
