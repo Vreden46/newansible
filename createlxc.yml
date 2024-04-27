@@ -5,12 +5,11 @@
     - name: 'Create LXC Container'
       proxmox:
           vmid: "{{NI}}" # Specifying Container ID
-          api_user: root # Proxmox user
-          api_password: Molixnel46! # Password in plaintext !!!
-          api_host: 192.168.0.10 # Proxmox hostname
-          password: 'Molixnel46!' # Password in plaintext !!!
+          node: pve
+          api_user: root@pam
+          api_password: "{{PW}}"
+          api_host: 192.168.0.10
           hostname: 'ansible-lxc' # Container hostname
-          node: 'pve' # Name of Proxmox host
           cores: '1'
           cpus: '1'
           #cpuunits: '1000'
