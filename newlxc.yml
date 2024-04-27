@@ -1,0 +1,18 @@
+---
+- name: Clone template
+  hosts: pve
+  gather_facts: no
+
+  tasks:
+    - name: Create new container with minimal options
+      community.general.proxmox:
+        vmid: 446
+        node: pve
+        api_user: root@pam
+        api_password: "{{PW}}" 
+        api_host: 192.168.0.10
+        password: 123456
+        storage: local-lvm
+        hostname: exampleansible2
+        ostemplate: 'local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz'
+      delegate_to: localhost
