@@ -4,13 +4,13 @@
   tasks:
     - name: 'Create LXC Container'
       proxmox:
-          vmid: '300' # Specifying Container ID
+          vmid: "{{NI}}" # Specifying Container ID
           api_user: root # Proxmox user
-          api_password: P@ssw0rd # Password in plaintext !!!
-          api_host: x.x.x.x # Proxmox hostname
-          password: 'P@ssw0rd' # Password in plaintext !!!
+          api_password: "{{PW}}" # Password in plaintext !!!
+          api_host: 192.168.0.10 # Proxmox hostname
+          password: "{{PW}}" # Password in plaintext !!!
           hostname: 'ansible-lxc' # Container hostname
-          node: 'proxmox01' # Name of Proxmox host
+          node: 'pve' # Name of Proxmox host
           cores: '1'
           cpus: '1'
           #cpuunits: '1000'
