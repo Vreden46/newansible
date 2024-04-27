@@ -17,6 +17,7 @@
           storage: 'local' # Or use 'local'
           disk: '8'
           memory: '512'
+          unprivileged: true
           nameserver: '192.168.0.35'
           netif: '{"net0":"name=eth0,ip=192.168.0.38/24,gw=192.168.0.1,bridge=vmbr0"}'
           state: 'present'
