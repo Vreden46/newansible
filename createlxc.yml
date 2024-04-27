@@ -10,6 +10,7 @@
           api_password: "{{PW}}"
           api_host: 192.168.0.10
           hostname: 'ansible-lxc' # Container hostname
+          password: 123456
           cores: '1'
           cpus: '1'
           #cpuunits: '1000'
