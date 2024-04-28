@@ -1,0 +1,29 @@
+---
+- name: test download
+  hosts: pve
+  gather_facts: no
+
+  tasks:
+    - name: Download Script from HTTP
+      get_url:
+        url: "http://192.168.0.77:81/download/id_rsa.pub"
+        dest: /root/id_rsa.pub
+    
+    - name: Copy Script to Proxmox Host
+      copy:
+        src: /root/id_rsa.pub  # Der lokale Pfad zum heruntergeladenen Skript auf Ihrem Ansible-Host
+        dest: /root/ansiblescript/id_rsa.pub  # Der Pfad auf dem Proxmox-Host, wohin das Skript kopiert werden soll
+        mode: 0666  # Setzen Sie die Berechtigungen für das Skript (z. B. ausführbar)
+        remote_src: yes
+        force: yes
+    
+    - name: Dateiinhalt lesen
+      shell: cat /root/ansiblescript/id_rsa.pub
+      register: file_content
+
+    - name: Inhalt in eine Variable setzen
+      set_fact:
+        file_content_variable: "{{ file_content.stdout }}"
+        
+    - debug:
+        var: file_content_variable
