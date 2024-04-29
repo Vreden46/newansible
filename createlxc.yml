@@ -2,6 +2,12 @@
 - name: Clone template
   hosts: pvem
   gather_facts: no
+  vars:
+    IP: "192.168.0.39"
+    PW: "Molixnel46!"
+    CN: "LXC-Test"
+    PWC: "Molixnel46!"
+    VMID: 502
 
   tasks:
     - name: Herunterladen des öffentlichen Schlüssels
@@ -32,14 +38,14 @@
     
     - name: Create new container with minimal options
       community.general.proxmox:
-        vmid: 448
+        vmid: "{{ VMID }}"
         node: pve
         api_user: root@pam
-        api_password: "{{PW}}"
+        api_password: "{{ PW }}"
         api_host: 192.168.0.10
-        password: "{{PWC}}"
+        password: "{{ PWC }}"
         storage: local-lvm
-        hostname: "{{CN}}"
+        hostname: "{{ CN }}"
         ostemplate: 'local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz'
         pubkey: "{{ pub_content_variable }}"
         disk: '8'
@@ -48,4 +54,3 @@
         nameserver: '192.168.0.35'
         netif: '{"net0":"name=eth0,ip={{ IP }}/24,gw=192.168.0.1,bridge=vmbr0"}'
       delegate_to: localhost
-
