@@ -2,7 +2,7 @@
 - name: Clone template
   hosts: pvem
   gather_facts: no
-  vars:
+  #vars:
     #IP: "192.168.0.39"
     #PW: "xxxx"
     #CN: "LXC-Test"
