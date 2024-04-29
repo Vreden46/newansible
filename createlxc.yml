@@ -1,6 +1,6 @@
 ---
 - name: Clone template
-  hosts: pve
+  hosts: pvem
   gather_facts: no
 
   tasks:
