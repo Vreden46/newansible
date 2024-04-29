@@ -4,9 +4,9 @@
   gather_facts: no
   vars:
     IP: "192.168.0.39"
-    PW: "Molixnel46!"
+    PW: "xxxx"
     CN: "LXC-Test"
-    PWC: "Molixnel46!"
+    PWC: "xxxx"
     VMID: 503
 
   tasks:
