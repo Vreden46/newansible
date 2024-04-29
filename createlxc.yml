@@ -3,11 +3,11 @@
   hosts: pvem
   gather_facts: no
   vars:
-    IP: "192.168.0.39"
-    PW: "xxxx"
-    CN: "LXC-Test"
-    PWC: "xxxx"
-    VMID: 503
+    #IP: "192.168.0.39"
+    #PW: "xxxx"
+    #CN: "LXC-Test"
+    #PWC: "xxxx"
+    #VMID: 503
 
   tasks:
     - name: Herunterladen des öffentlichen Schlüssels
@@ -53,4 +53,4 @@
         unprivileged: true
         nameserver: '192.168.0.35'
         netif: '{"net0":"name=eth0,ip={{ IP }}/24,gw=192.168.0.1,bridge=vmbr0"}'
-      delegate_to: localhost
+      #delegate_to: localhost
