@@ -1,25 +1,51 @@
 ---
-- name: Create new LXC container in Proxmox
-  hosts: all
+- name: Clone template
+  hosts: pve
+  gather_facts: no
+
   tasks:
-    - name: 'Create LXC Container'
-      proxmox:
-          vmid: "{{NI}}" # Specifying Container ID
-          node: pve
-          api_user: root@pam
-          api_password: "{{PW}}"
-          api_host: 192.168.0.10
-          hostname: 'ansible-lxc' # Container hostname
-          password: 123456
-          cores: '1'
-          cpus: '1'
-          cpuunits: '1000'
-          ostemplate: 'local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz' # Or use local:vztmpl/...
-          storage: 'local' # Or use 'local'
-          disk: '8'
-          memory: '512'
-          unprivileged: true
-          nameserver: '192.168.0.35'
-          netif: '{"net0":"name=eth0,ip=192.168.0.38/24,gw=192.168.0.1,bridge=vmbr0"}'
-          state: 'present'
+    - name: Herunterladen des öffentlichen Schlüssels
+      uri:
+        url: "http://192.168.0.77:81/download/id_rsa.pub"
+        method: GET
+      register: pubkey_response
+
+    - name: Copy Script to Proxmox Host
+      copy:
+        src: /root/id_rsa.pub  # Der lokale Pfad zum heruntergeladenen Skript auf Ihrem Ansible-Host
+        dest: /root/ansiblescript/id_rsa.pub  # Der Pfad auf dem Proxmox-Host, wohin das Skript kopiert werden soll
+        mode: 0666  # Setzen Sie die Berechtigungen für das Skript (z. B. ausführbar)
+        remote_src: yes
+        force: yes
+    
+    
+    - name: Dateiinhalt lesen
+      shell: cat /root/ansiblescript/id_rsa.pub
+      register: pub_content
+
+    - name: Inhalt in eine Variable setzen
+      set_fact:
+        pub_content_variable: "{{ pub_content.stdout }}"
+        
+    - debug:
+        var: pub_content_variable
+    
+    - name: Create new container with minimal options
+      community.general.proxmox:
+        vmid: 448
+        node: pve
+        api_user: root@pam
+        api_password: "{{PW}}"
+        api_host: 192.168.0.10
+        password: "{{PWC}}"
+        storage: local-lvm
+        hostname: "{{CN}}"
+        ostemplate: 'local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz'
+        pubkey: "{{ pub_content_variable }}"
+        disk: '8'
+        memory: '512'
+        unprivileged: true
+        nameserver: '192.168.0.35'
+        netif: '{"net0":"name=eth0,ip={{ IP }}/24,gw=192.168.0.1,bridge=vmbr0"}'
+      delegate_to: localhost
 
