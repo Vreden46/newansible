@@ -8,6 +8,8 @@
       user:
         name: "{{USR}}"
         state: present
-        password: "{{PW}}"
         update_password: always
         groups: sudo
+
+    - name: Set password for user torsten
+      ansible.builtin.shell: echo "{{PW}}" | chpasswd
