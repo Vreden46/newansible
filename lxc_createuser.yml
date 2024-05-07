@@ -10,6 +10,4 @@
         state: present
         update_password: always
         groups: sudo
-
-    - name: Set password for user torsten
-      ansible.builtin.shell: echo "{{PW}}" | chpasswd
+        password: "{{ PW | password_hash('sha512') }}"
