@@ -1,0 +1,13 @@
+---
+- name: Create user torsten and set password
+  hosts: lxc
+  become: yes
+
+  tasks:
+    - name: Add user torsten
+      user:
+        name: "{{USR}}"
+        state: present
+        password: "{{PW}}"
+        update_password: always
+        groups: sudo
