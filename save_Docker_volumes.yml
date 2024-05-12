@@ -1,0 +1,33 @@
+- name: Copy Script to Proxmox Host
+  hosts: all
+  gather_facts: false
+  become: true
+  
+  tasks:
+    - name: Download Script from HTTP
+      get_url:
+        url: "http://192.168.0.77:81/download/savevolumes.sh"  # Ihre HTTP-Adresse hier einfügen
+        dest: /home/torsten/script/savevolumes.sh  # Der Pfad auf dem Ansible-Host, wohin das Skript heruntergeladen werden soll
+
+    - name: Ensure ansiblescripts directory exists
+      file:
+        path: /home/torsten/script
+        state: directory
+     
+
+    - name: Copy Script to Docker Host
+      copy:
+        src: /home/torsten/script/savevolumes.sh  # Der lokale Pfad zum heruntergeladenen Skript auf Ihrem Ansible-Host
+        dest: /home/torsten/script/savevolumes.sh  # Der Pfad auf dem Proxmox-Host, wohin das Skript kopiert werden soll
+        mode: 0755  # Setzen Sie die Berechtigungen für das Skript (z. B. ausführbar)
+        remote_src: yes
+        force: yes
+
+    - name: Update and upgrade everything on pve
+      shell: 
+        cmd: bash /home/torsten/script/savevolumes.sh
+      register: var_script
+
+    - name: Shell script output
+      debug:
+        msg: "{{ var_script.stdout_lines }}"
