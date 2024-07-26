@@ -42,7 +42,7 @@
         node: pve
         api_user: root@pam
         api_password: "{{ PW }}"
-        api_host: 192.168.0.10
+        api_host: 192.168.0.185
         password: "{{ PWC }}"
         storage: local-lvm
         hostname: "{{ CN }}"
