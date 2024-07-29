@@ -57,7 +57,7 @@
         hostname: "{{ CN }}"
         ostemplate: 'local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz'
         pubkey: "{{ pub_content_variable }}"
-        disk: '8'
+        disk: '25'
         memory: '512'
         unprivileged: true
         nameserver: '192.168.0.35'
