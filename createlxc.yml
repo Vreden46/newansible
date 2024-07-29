@@ -3,28 +3,29 @@
   hosts: pvem
   gather_facts: no
   #vars:
-    #IP: "192.168.0.39"
-    #PW: "xxxx"
-    #CN: "LXC-Test"
-    #PWC: "xxxx"
-    #VMID: 503
+    #IP: "192.168.0.59"
+    #PW: "Molixnel46!"
+    #CN: "LXC-Test3"
+    #PWC: "fffff"
+    #VMID: 514
 
   tasks:
     - name: Herunterladen des öffentlichen Schlüssels
       uri:
         url: "http://192.168.0.77:81/download/id_rsa.pub"
         method: GET
+        return_content: yes
       register: pubkey_response
 
     - name: Debugge den Inhalt des heruntergeladenen Schlüssels
       debug:
         msg: "{{ pubkey_response.content }}"
-
+    
     - name: Speichern des öffentlichen Schlüssels in einer Datei
       copy:
         content: "{{ pubkey_response.content }}"
-        dest: "/root/id_rsa.pub" 
-    
+        dest: "/root/id_rsa.pub"
+
     - name: Copy Script to Proxmox Host
       copy:
         src: /root/id_rsa.pub  # Der lokale Pfad zum heruntergeladenen Skript auf Ihrem Ansible-Host
@@ -32,7 +33,6 @@
         mode: 0666  # Setzen Sie die Berechtigungen für das Skript (z. B. ausführbar)
         remote_src: yes
         force: yes
-    
     
     - name: Dateiinhalt lesen
       shell: cat /root/ansiblescript/id_rsa.pub
