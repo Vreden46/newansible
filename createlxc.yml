@@ -16,6 +16,15 @@
         method: GET
       register: pubkey_response
 
+    - name: Debugge den Inhalt des heruntergeladenen Schlüssels
+      debug:
+        msg: "{{ pubkey_response.content }}"
+
+   - name: Speichern des öffentlichen Schlüssels in einer Datei
+      copy:
+        content: "{{ pubkey_response.content }}"
+        dest: "/root/id_rsa.pub" 
+    
     - name: Copy Script to Proxmox Host
       copy:
         src: /root/id_rsa.pub  # Der lokale Pfad zum heruntergeladenen Skript auf Ihrem Ansible-Host
@@ -39,7 +48,7 @@
     - name: Create new container with minimal options
       community.general.proxmox:
         vmid: "{{ VMID }}"
-        node: pve
+        node: pvem
         api_user: root@pam
         api_password: "{{ PW }}"
         api_host: 192.168.0.185
