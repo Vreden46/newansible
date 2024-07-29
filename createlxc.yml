@@ -20,10 +20,10 @@
       debug:
         msg: "{{ pubkey_response.content }}"
 
-   - name: Speichern des öffentlichen Schlüssels in einer Datei
-     copy:
-       content: "{{ pubkey_response.content }}"
-       dest: "/root/id_rsa.pub" 
+    - name: Speichern des öffentlichen Schlüssels in einer Datei
+      copy:
+        content: "{{ pubkey_response.content }}"
+        dest: "/root/id_rsa.pub" 
     
     - name: Copy Script to Proxmox Host
       copy:
