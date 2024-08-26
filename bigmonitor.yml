@@ -1,0 +1,55 @@
+---
+- name: Überwache Systemressourcen
+  hosts: web
+  gather_facts: no
+  tasks:
+    - name: Festplattenspeicher abfragen
+      command: df -h
+      register: disk_usage
+
+    - name: Zeige Festplattenspeicher
+      debug:
+        msg: |
+          Disk Usage:
+          {{ disk_usage.stdout }}
+
+    - name: Arbeitsspeicherauslastung abfragen
+      command: free -h
+      register: memory_usage
+
+    - name: Zeige Arbeitsspeicherauslastung
+      debug:
+        msg: |
+          Memory Usage:
+          {{ memory_usage.stdout }}
+
+    - name: CPU-Auslastung abfragen
+      command: uptime
+      register: cpu_load
+
+    - name: Zeige CPU-Auslastung
+      debug:
+        msg: |
+          CPU Load:
+          {{ cpu_load.stdout }}
+          
+    - name: Systemuptime abfragen
+      command: uptime -p
+      register: system_uptime
+
+    - name: Zeige Systemuptime
+      debug:
+        msg: |
+          System Uptime:
+          {{ system_uptime.stdout }}
+
+    
+    - name: Verfügbare Updates abfragen (Debian/Ubuntu)
+      command: apt list --upgradable
+      register: available_updates
+
+    - name: Zeige verfügbare Updates
+      debug:
+        msg: |
+          Available Updates:
+          {{ available_updates.stdout }}
