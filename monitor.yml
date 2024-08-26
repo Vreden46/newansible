@@ -1,1 +1,25 @@
+---
+- name: Überwache Festplattenspeicher und Arbeitsspeicherauslastung
+  hosts: web
+  gather_facts: no
+  tasks:
+    - name: Festplattenspeicher abfragen
+      command: df -h
+      register: disk_usage
+
+    - name: Zeige Festplattenspeicher
+      debug:
+        msg: |
+          Disk Usage:
+          {{ disk_usage.stdout }}
+
+    - name: Arbeitsspeicherauslastung abfragen
+      command: free -h
+      register: memory_usage
+
+    - name: Zeige Arbeitsspeicherauslastung
+      debug:
+        msg: |
+          Memory Usage:
+          {{ memory_usage.stdout }}
 
