@@ -1,15 +1,12 @@
 ---
 - name: Wake-on-LAN playbook
-  hosts: all
-  become: yes
+  hosts: localhost  # Führe dies auf localhost (Steuerrechner) aus
+  become: yes       # Erfordert möglicherweise root-Rechte für die Installation
   tasks:
-    - name: Ensure wakeonlan is installed
+    - name: Ensure wakeonlan is installed on localhost
       ansible.builtin.package:
         name: wakeonlan
         state: present
 
     - name: Send WoL packet to Proxmox Server
       ansible.builtin.command: wakeonlan 60:32:b1:d8:e6:7b
-      args:
-        chdir: /usr/bin/
-      ignore_errors: true
