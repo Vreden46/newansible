@@ -1,6 +1,6 @@
 ---
 - name: Wake-on-LAN playbook
-  hosts: localhost  # Führe dies auf localhost (Steuerrechner) aus
+  hosts: pve185  # Führe dies auf localhost (Steuerrechner) aus
   become: yes       # Erfordert möglicherweise root-Rechte für die Installation
   tasks:
     - name: Ensure wakeonlan is installed on localhost
